@@ -1,3 +1,4 @@
+import Notification from "../../@shared/notification";
 import BaseEntity, { BaseEntityProps } from "../../@shared/shared";
 import Coordinates from "./value_objects/coordinates";
 import Email from "./value_objects/email";
@@ -15,6 +16,7 @@ export default class Customer extends BaseEntity {
   private _email: Email;
   private _phone: Phone;
   private _coordinates: Coordinates;
+  private _notification: Notification;
 
   constructor(props: CustomerProps) {
     super(props);
@@ -23,13 +25,19 @@ export default class Customer extends BaseEntity {
     this._email = props.email;
     this._phone = props.phone;
     this._coordinates = props.coordinates;
+    this._notification = new Notification();
 
     this.validateCustomer();
   }
 
   validateCustomer(): void {
     if (this._name.length < 1 || this._name.length > 100) {
-      throw new Error("O nome deve ter entre 1 e 100 caracteres.");
+      this._notification.addMessage(
+        "Invalid Customer",
+        "O nome deve ter entre 1 e 100 caracteres.",
+        "https://httpwg.org/specs/rfc9110.html#status.400",
+        400
+      );
     }
   }
 
@@ -47,5 +55,9 @@ export default class Customer extends BaseEntity {
 
   get coordinates(): Coordinates {
     return this._coordinates;
+  }
+
+  get notification(): Notification {
+    return this._notification;
   }
 }

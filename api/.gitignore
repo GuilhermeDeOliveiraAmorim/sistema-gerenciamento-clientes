@@ -2,4 +2,4 @@ node_modules
 dist
 .env
 build
-.test-report.html
+test-report.html

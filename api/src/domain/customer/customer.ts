@@ -45,7 +45,7 @@ export default class Customer extends BaseEntity {
     return this._phone;
   }
 
-  get x_coordinate(): Coordinates {
+  get coordinates(): Coordinates {
     return this._coordinates;
   }
 }

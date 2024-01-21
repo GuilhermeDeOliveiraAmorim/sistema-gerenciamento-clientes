@@ -9,7 +9,7 @@ const host = "localhost";
 const user = "postgres";
 const database = "sgc_db";
 const password = "password";
-const port = "5433";
+const port = "5432";
 
 export default class CustomerRepository implements CustomerRepositoryInterface {
   private pool: Pool;
@@ -31,11 +31,16 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
       await client.query("BEGIN");
 
       const insertQuery = `
-        INSERT INTO customers (name, email, phone, x_coordinate, y_coordinate)
-        VALUES ($1, $2, $3, $4, $5)
+        INSERT INTO customers (id, active, created_at, updated_at, deactivated_at, name, email, phone, x_coordinates, y_coordinates)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
       `;
 
       const values = [
+        customer.id,
+        customer.active,
+        customer.createdAt,
+        customer.updatedAt,
+        customer.deactivatedAt,
         customer.name,
         customer.email.value,
         customer.phone.value,
@@ -59,7 +64,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
 
     try {
       const query = `
-        SELECT id, name, email, phone, x_coordinate, y_coordinate
+        SELECT id, name, email, phone, x_coordinates, y_coordinates
         FROM customers
         WHERE id = $1
       `;
@@ -77,7 +82,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
         name: row.name,
         email: new Email(row.email),
         phone: new Phone(row.phone),
-        coordinates: new Coordinates(row.x_coordinate, row.y_coordinate),
+        coordinates: new Coordinates(row.x_coordinates, row.y_coordinates),
       });
 
       return customer;
@@ -91,7 +96,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
 
     try {
       const query = `
-        SELECT id, name, email, phone, x_coordinate, y_coordinate
+        SELECT id, name, email, phone, x_coordinates, y_coordinates
         FROM customers
         WHERE email = $1
       `;
@@ -109,7 +114,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
         name: row.name,
         email: new Email(row.email),
         phone: new Phone(row.phone),
-        coordinates: new Coordinates(row.x_coordinate, row.y_coordinate),
+        coordinates: new Coordinates(row.x_coordinates, row.y_coordinates),
       });
 
       return customer;
@@ -123,7 +128,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
 
     try {
       const query = `
-        SELECT id, name, email, phone, x_coordinate, y_coordinate
+        SELECT id, name, email, phone, x_coordinates, y_coordinates
         FROM customers
       `;
 
@@ -135,7 +140,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
           name: row.name,
           email: new Email(row.email),
           phone: new Phone(row.phone),
-          coordinates: new Coordinates(row.x_coordinate, row.y_coordinate),
+          coordinates: new Coordinates(row.x_coordinates, row.y_coordinates),
         });
       });
 

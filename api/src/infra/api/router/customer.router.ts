@@ -24,9 +24,11 @@ customerRouter.post("/", async (req: Request, res: Response) => {
 
 customerRouter.get("/:id", async (req: Request, res: Response) => {
   const customerFactory = CustomerFactory.create();
-
   try {
-    res.send("Olá!");
+    const output = await customerFactory.findCustomerById({
+      id: req.body.id
+    })
+    res.send(output);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     res.status(500).send({
@@ -37,9 +39,11 @@ customerRouter.get("/:id", async (req: Request, res: Response) => {
 
 customerRouter.get("/:email", async (req: Request, res: Response) => {
   const customerFactory = CustomerFactory.create();
-
   try {
-    res.send("Olá!");
+    const output = await customerFactory.findCustomerByEmail({
+      email: req.params.email
+    })
+    res.send(output);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     res.status(500).send({

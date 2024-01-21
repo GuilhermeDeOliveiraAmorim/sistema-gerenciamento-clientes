@@ -1,11 +1,10 @@
 {
   "start:dev": "npx nodemon",
-  "build": "rimraf ./build && tsc",
-  "start": "npm run build && node build/index.js",
   "scripts": {
-    "lint": "eslint . --ext .ts",
     "test": "npm run tsc -- --noEmit && jest",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "dev": "ts-node src/infra/api/server.ts",
+    "run-prod": "npm run dev"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.62",

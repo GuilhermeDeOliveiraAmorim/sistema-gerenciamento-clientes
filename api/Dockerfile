@@ -1,20 +1,9 @@
-# Use the official Node.js image as the base image
-FROM node:14
+FROM node
 
-# Set the working directory to /app/api
-WORKDIR /api
+WORKDIR /home/app/api
 
-# Copy package.json and package-lock.json to the container
+ENV PATH /home/app/api/node_modules/.bin:$PATH
+
 COPY package*.json ./
-
-# Install project dependencies
 RUN npm install
-
-# Copy the rest of your application's source code to the container
 COPY . .
-
-# Expose a port (if your application uses one)
-# EXPOSE 3000
-
-# Start your application
-CMD ["npm", "start"]

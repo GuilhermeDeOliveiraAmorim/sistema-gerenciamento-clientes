@@ -5,11 +5,11 @@ import Email from "../../domain/customer/value_objects/email";
 import Coordinates from "../../domain/customer/value_objects/coordinates";
 import Phone from "../../domain/customer/value_objects/phone";
 
-const user = process.env.DB_USER;
-const host = process.env.DB_USER;
-const database = process.env.DB_NAME;
-const password = process.env.DB_PASSWORD;
-const port = process.env.DB_PORT;
+const host = "localhost";
+const user = "postgres";
+const database = "sgc_db";
+const password = "password";
+const port = "5433";
 
 export default class CustomerRepository implements CustomerRepositoryInterface {
   private pool: Pool;

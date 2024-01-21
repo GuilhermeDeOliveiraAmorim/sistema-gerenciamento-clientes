@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.prod
+    volumes:
+      - ./api:/home/app/api
+      - /home/app/api/node_modules
+    command: npm run run-prod
+    environment:
+      DB_HOST: localhost
+      DB_USER: postgres
+      DB_PORT: 5432
+      DB_PASSWORD: password
+      DB_NAME: sgc_db
+      PORT: 8000
+    ports:
+      - 8000:8000
+    depends_on:
+      - postgres
+    networks:
+      - sgc
+
+  postgres:
+    container_name: postgres
+    restart: always
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: sgc_db
+    networks:
+      - sgc
+
+networks:
+  sgc:

@@ -5,9 +5,4 @@ export default interface CustomerRepositoryInterface {
   findById(customerId: string): Promise<Customer | null>;
   findByEmail(customerEmail: string): Promise<Customer | null>;
   findAll(): Promise<Customer[]>;
-  update(
-    customerId: string,
-    updatedCustomer: Customer
-  ): Promise<Customer | null>;
-  activate(customerId: string): Promise<boolean>;
 }

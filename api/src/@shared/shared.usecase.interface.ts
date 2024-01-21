@@ -1,3 +1,4 @@
 export interface SharedUseCaseInterface {
-  execute(input: unknown): Promise<unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  execute(input: any): Promise<any>;
 }

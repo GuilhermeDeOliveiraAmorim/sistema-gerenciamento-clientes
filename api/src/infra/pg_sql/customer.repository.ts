@@ -5,16 +5,22 @@ import Email from "../../domain/customer/value_objects/email";
 import Coordinates from "../../domain/customer/value_objects/coordinates";
 import Phone from "../../domain/customer/value_objects/phone";
 
+const user = process.env.DB_USER;
+const host = process.env.DB_USER;
+const database = process.env.DB_NAME;
+const password = process.env.DB_PASSWORD;
+const port = process.env.DB_PORT;
+
 export default class CustomerRepository implements CustomerRepositoryInterface {
   private pool: Pool;
 
   constructor() {
     this.pool = new Pool({
-      user: "seu-usuario",
-      host: "seu-host",
-      database: "sua-database",
-      password: "sua-senha",
-      port: 5432,
+      user: user,
+      host: host,
+      database: database,
+      password: password,
+      port: Number(port),
     });
   }
 

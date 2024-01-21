@@ -1,4 +1,5 @@
 import CustomerRepository from "../../infra/pg_sql/customer.repository";
+import CalculateEfficientRouteUseCase from "../../usecases/customer/calculate.efficient.route";
 import CreateCustomerUseCase from "../../usecases/customer/create.customer";
 import FindAllCustomersUseCase from "../../usecases/customer/find.all.customers";
 import FindByEmailCustomerUseCase from "../../usecases/customer/find.customer.by.email";
@@ -19,12 +20,16 @@ export default class CustomerFactory {
     const findCustomerByEmailUseCase = new FindByEmailCustomerUseCase(
       customerRepository
     );
+    const calculateRouteUseCase = new CalculateEfficientRouteUseCase(
+      customerRepository
+    );
 
     const userFacade = new CustomerFacade({
       createUseCase: createCustomerUseCase,
       findAllUseCase: findAllCustomersUseCase,
       findByIdUseCase: findCustomerByIdUseCase,
       findByEmailUseCase: findCustomerByEmailUseCase,
+      calculateRouteUseCase: calculateRouteUseCase,
     });
 
     return userFacade;

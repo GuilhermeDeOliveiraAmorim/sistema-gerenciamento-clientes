@@ -1,12 +1,9 @@
 import { SharedUseCaseInterface } from "../../@shared/shared.usecase.interface";
-import {
-  InputFindByEmailCustomerDto,
-  OutputFindByEmailCustomerDto,
-} from "../../usecases/customer/find.customer.by.email";
 import CustomerFacadeInterface, {
   InputCreateCustomerFacadeDto,
   InputFindByEmailCustomerFacadeDto,
   InputFindByIdCustomerFacadeDto,
+  OutputCalculateCoordinatesFacadeDto,
   OutputCreateCustomerFacadeDto,
   OutputFindAllCustomersFacadeDto,
   OutputFindByEmailCustomerFacadeDto,
@@ -18,6 +15,7 @@ export interface UseCaseProps {
   findAllUseCase: SharedUseCaseInterface;
   findByEmailUseCase: SharedUseCaseInterface;
   findByIdUseCase: SharedUseCaseInterface;
+  calculateRouteUseCase: SharedUseCaseInterface;
 }
 
 export default class CustomerFacade implements CustomerFacadeInterface {
@@ -25,12 +23,14 @@ export default class CustomerFacade implements CustomerFacadeInterface {
   private _findAllUseCase: SharedUseCaseInterface;
   private _findByEmailUseCase: SharedUseCaseInterface;
   private _findByIdUseCase: SharedUseCaseInterface;
+  private _calculateRouteUseCase: SharedUseCaseInterface;
 
   constructor(useCaseProps: UseCaseProps) {
     this._createUseCase = useCaseProps.createUseCase;
     this._findAllUseCase = useCaseProps.findAllUseCase;
     this._findByEmailUseCase = useCaseProps.findByEmailUseCase;
     this._findByIdUseCase = useCaseProps.findByIdUseCase;
+    this._calculateRouteUseCase = useCaseProps.calculateRouteUseCase;
   }
 
   createCustomer(
@@ -53,5 +53,9 @@ export default class CustomerFacade implements CustomerFacadeInterface {
     input: InputFindByIdCustomerFacadeDto
   ): Promise<OutputFindByIdCustomerFacadeDto> {
     return this._findByIdUseCase.execute(input);
+  }
+
+  calculateRoutes(): Promise<OutputCalculateCoordinatesFacadeDto> {
+    return this._calculateRouteUseCase.execute({});
   }
 }

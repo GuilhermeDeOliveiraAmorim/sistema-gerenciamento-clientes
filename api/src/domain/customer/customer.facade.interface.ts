@@ -51,6 +51,17 @@ export interface OutputFindByIdCustomerFacadeDto {
   yCoordinate: number;
 }
 
+export interface OutputCalculateCoordinatesFacadeDto {
+  customers: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+    xCoordinate: number;
+    yCoordinate: number;
+  }[];
+}
+
 export default interface CustomerFacadeInterface {
   createCustomer(
     input: InputCreateCustomerFacadeDto
@@ -62,4 +73,5 @@ export default interface CustomerFacadeInterface {
   findCustomerById(
     input: InputFindByIdCustomerFacadeDto
   ): Promise<OutputFindByIdCustomerFacadeDto>;
+  calculateRoutes(): Promise<OutputCalculateCoordinatesFacadeDto>;
 }

@@ -65,3 +65,17 @@ customerRouter.get("/", async (req: Request, res: Response) => {
     });
   }
 });
+
+customerRouter.get("/calculate-route", async (req: Request, res: Response) => {
+  const customerFactory = CustomerFactory.create();
+
+  try {
+    const output = await customerFactory.calculateRoutes();
+    res.send(output);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    res.status(500).send({
+      message: err.message,
+    });
+  }
+});

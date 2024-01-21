@@ -32,12 +32,12 @@ export default class Customer extends BaseEntity {
 
   validateCustomer(): void {
     if (this._name.length < 1 || this._name.length > 100) {
-      this._notification.addMessage(
-        "Invalid Customer",
-        "O nome deve ter entre 1 e 100 caracteres.",
-        "https://httpwg.org/specs/rfc9110.html#status.400",
-        400
-      );
+      this._notification.addMessage({
+        title: "Invalid Customer",
+        detail: "O nome deve ter entre 1 e 100 caracteres.",
+        type: "https://httpwg.org/specs/rfc9110.html#status.400",
+        status: 400,
+      });
     }
   }
 

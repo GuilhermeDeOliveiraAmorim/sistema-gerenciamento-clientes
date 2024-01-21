@@ -14,12 +14,12 @@ export default class Email {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(value)) {
-      this._notification.addMessage(
-        "Invalid Email Format",
-        "O e-mail não possui um formato válido.",
-        "https://httpwg.org/specs/rfc9110.html#status.400",
-        400
-      );
+      this._notification.addMessage({
+        title: "Invalid Email Format",
+        detail: "O e-mail não possui um formato válido.",
+        type: "https://httpwg.org/specs/rfc9110.html#status.400",
+        status: 400,
+      });
     }
   }
 

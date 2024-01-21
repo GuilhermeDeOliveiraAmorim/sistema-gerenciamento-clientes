@@ -14,12 +14,12 @@ export default class Phone {
     const phoneRegex = /^(?:(\d{2}))?[-.\s]?(\d{4,5})[-.\s]?(\d{4})$/;
 
     if (!phoneRegex.test(value)) {
-      this._notification.addMessage(
-        "Invalid Phone Format",
-        "O número de telefone não possui um formato válido.",
-        "https://httpwg.org/specs/rfc9110.html#status.400",
-        400
-      );
+      this._notification.addMessage({
+        title: "Invalid Phone Format",
+        detail: "O número de telefone não possui um formato válido.",
+        type: "https://httpwg.org/specs/rfc9110.html#status.400",
+        status: 400,
+      });
     }
   }
 

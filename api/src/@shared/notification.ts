@@ -1,33 +1,27 @@
-export default class Notification {
-  private messages: {
-    title: string;
-    detail: string;
-    type: string;
-    status: number;
-    instance?: string;
-  }[] = [];
+export interface NotificationProps {
+  title: string;
+  detail: string;
+  type: string;
+  status: number;
+  instance?: string;
+}
 
-  addMessage(
-    title: string,
-    detail: string,
-    type: string,
-    status: number,
-    instance?: string
-  ): void {
-    this.messages.push({ title, detail, type, status, instance });
+export default class Notification {
+  private messages: NotificationProps[] = [];
+
+  addMessage(props: NotificationProps): void {
+    this.messages.push(props);
+  }
+
+  addMessages(messages: NotificationProps[]): void {
+    this.messages.push(...messages);
   }
 
   hasMessages(): boolean {
     return this.messages.length > 0;
   }
 
-  getMessages(): {
-    title: string;
-    detail: string;
-    type: string;
-    status: number;
-    instance?: string;
-  }[] {
+  getMessages(): NotificationProps[] {
     return this.messages;
   }
 }

@@ -19,21 +19,21 @@ export default class Coordinates {
       !this.isValidDecimal(this._x, precision) ||
       !this.isValidDecimal(this._y, precision)
     ) {
-      this._notification.addMessage(
-        "Invalid Coordinates",
-        `As coordenadas devem ter precisão de até ${precision} casas decimais.`,
-        "https://httpwg.org/specs/rfc9110.html#status.400",
-        400
-      );
+      this._notification.addMessage({
+        title: "Invalid Coordinates",
+        detail: `As coordenadas devem ter precisão de até ${precision} casas decimais.`,
+        type: "https://httpwg.org/specs/rfc9110.html#status.400",
+        status: 400,
+      });
     }
 
     if (!this.isValidNumber(this._x) || !this.isValidNumber(this._y)) {
-      this._notification.addMessage(
-        "Invalid Coordinates",
-        "As coordenadas devem ser números válidos.",
-        "https://httpwg.org/specs/rfc9110.html#status.400",
-        400
-      );
+      this._notification.addMessage({
+        title: "Invalid Coordinates",
+        detail: "As coordenadas devem ser números válidos.",
+        type: "https://httpwg.org/specs/rfc9110.html#status.400",
+        status: 400,
+      });
     }
   }
 

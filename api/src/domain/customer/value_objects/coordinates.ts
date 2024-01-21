@@ -26,24 +26,11 @@ export default class Coordinates {
         status: 400,
       });
     }
-
-    if (!this.isValidNumber(this._x) || !this.isValidNumber(this._y)) {
-      this._notification.addMessage({
-        title: "Invalid Coordinates",
-        detail: "As coordenadas devem ser números válidos.",
-        type: "https://httpwg.org/specs/rfc9110.html#status.400",
-        status: 400,
-      });
-    }
   }
 
   private isValidDecimal(value: number, precision: number): boolean {
     const decimalRegex = new RegExp(`^-?\\d+(\\.\\d{1,${precision}})?$`);
     return decimalRegex.test(value.toString());
-  }
-
-  private isValidNumber(value: number): boolean {
-    return Number.isFinite(value);
   }
 
   get x(): number {

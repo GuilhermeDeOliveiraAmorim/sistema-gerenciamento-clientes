@@ -16,6 +16,31 @@ npm run dev
 ```bash
 npm run dev
 ```
+#Tecnologias
+
+##Backend
+
+- Linguagem de Programação: TypeScript
+- Framework Web: Express.js
+- Banco de Dados: PostgreSQL
+- Contêinerização: Docker
+- Orquestração de Contêineres: Docker Compose
+- Ambiente de Desenvolvimento: Node.js
+- Gerenciador de Pacotes: npm
+- Testes Automatizados: Jest
+
+##Frontend
+
+- Linguagem de Programação: TypeScript
+- Biblioteca de UI: Ant Design
+- Framework de Aplicativo Web: React
+- Gerenciamento de Estado: useState, useContext (React Hooks)
+- Requisições HTTP: Axios
+- Formulários: Ant Design Form, rc-input
+- Roteamento: React Router
+- Estilização: Tailwind CSS
+- Mensagens de Notificação: Ant Design Message
+- Paginação Infinita: react-infinite-scroll-component
 
 #autor
 

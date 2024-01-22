@@ -12,7 +12,7 @@ Rodar no banco o script SQL para criar a tabela customer: api/src/infra/pg_sql/s
 npm run dev
 ```
 
-#em /api rodar:
+#em outro terminal, em /api, rodar:
 ```bash
 npm run dev
 ```

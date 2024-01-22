@@ -5,14 +5,16 @@ export class CreateCustomerUseCase {
   constructor(private CustomerGateway: CustomerGateway) {}
 
   async execute(
-    name: string,
     email: string,
+    name: string,
+    phone: string,
     x_coordinate: number,
     y_coordinate: number
   ): Promise<Customer> {
     return await this.CustomerGateway.create(
-      name,
       email,
+      name,
+      phone,
       x_coordinate,
       y_coordinate
     );

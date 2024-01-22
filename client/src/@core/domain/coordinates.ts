@@ -1,16 +1,16 @@
 export type CoordinatesProps = {
-  _x_coordinate: number;
-  _y_coordinate: number;
+  _x: number;
+  _y: number;
 };
 
 export class Coordinates {
   constructor(public props: CoordinatesProps) {}
 
-  get _x_coordinate() {
-    return this.props._x_coordinate;
+  get _x() {
+    return this.props._x;
   }
 
-  get _y_coordinate() {
-    return this.props._y_coordinate;
+  get _y() {
+    return this.props._y;
   }
 }

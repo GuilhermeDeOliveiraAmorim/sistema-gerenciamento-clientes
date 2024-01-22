@@ -6,29 +6,35 @@ export class CustomerHttpGateway implements CustomerGateway {
   constructor(private http: AxiosInstance) {}
 
   async create(
-    name: string,
     email: string,
+    name: string,
+    phone: string,
     x_coordinate: number,
     y_coordinate: number
   ): Promise<Customer> {
     const input = {
-      name: name,
       email: email,
+      name: name,
+      phone: phone,
       x_coordinate: x_coordinate,
       y_coordinate: y_coordinate,
     };
 
     const customer = await this.http.post("/customer", input);
 
-    const newCustomer = new Customer({
-      _id: customer.data.id,
-      _name: customer.data.name,
-      _email: customer.data.email,
-      _phone: customer.data.phone,
-      _coordinates: customer.data.coordinates,
-    });
+    if (customer.data.message) {
+      return customer.data.message;
+    } else {
+      const newCustomer = new Customer({
+        _id: customer.data.id,
+        _email: customer.data.email,
+        _name: customer.data.name,
+        _phone: customer.data.phone,
+        _coordinates: customer.data.coordinates,
+      });
 
-    return newCustomer;
+      return newCustomer;
+    }
   }
 
   async findById(id: string): Promise<Customer> {
@@ -75,7 +81,7 @@ export class CustomerHttpGateway implements CustomerGateway {
     const findedCustomers: Customer[] = [];
 
     customers.data.customers.map((customer: Customer) => {
-        findedCustomers.push(customer);
+      findedCustomers.push(customer);
     });
 
     return findedCustomers;
@@ -87,7 +93,7 @@ export class CustomerHttpGateway implements CustomerGateway {
     const findedCustomers: Customer[] = [];
 
     customers.data.exams.map((customer: Customer) => {
-        findedCustomers.push(customer);
+      findedCustomers.push(customer);
     });
 
     return findedCustomers;

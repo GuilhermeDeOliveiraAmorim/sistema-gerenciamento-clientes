@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import CustomerFactory from "../../../domain/customer/customer.factory";
+import Notification from "../../../@shared/notification";
 
 export const customerRouter = express.Router();
 
@@ -13,7 +14,12 @@ customerRouter.post("/", async (req: Request, res: Response) => {
       xCoordinate: req.body.x_coordinate,
       yCoordinate: req.body.y_coordinate,
     });
-    res.send(output);
+
+    if (output instanceof Notification) {
+      res.status(400).send(output);
+    } else {
+      res.send(output);
+    }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     res.status(500).send({
@@ -26,9 +32,14 @@ customerRouter.get("/id/:id", async (req: Request, res: Response) => {
   const customerFactory = CustomerFactory.create();
   try {
     const output = await customerFactory.findCustomerById({
-      id: req.params.id
-    })
-    res.send(output);
+      id: req.params.id,
+    });
+
+    if (output instanceof Notification) {
+      res.status(400).send(output);
+    } else {
+      res.send(output);
+    }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     res.status(500).send({
@@ -41,9 +52,14 @@ customerRouter.get("/email/:email", async (req: Request, res: Response) => {
   const customerFactory = CustomerFactory.create();
   try {
     const output = await customerFactory.findCustomerByEmail({
-      email: req.params.email
-    })
-    res.send(output);
+      email: req.params.email,
+    });
+
+    if (output instanceof Notification) {
+      res.status(400).send(output);
+    } else {
+      res.send(output);
+    }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     res.status(500).send({
@@ -57,7 +73,12 @@ customerRouter.get("/", async (req: Request, res: Response) => {
 
   try {
     const output = await customerFactory.findAllCustomers();
-    res.send(output);
+
+    if (output instanceof Notification) {
+      res.status(400).send(output);
+    } else {
+      res.send(output);
+    }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     res.status(500).send({
@@ -71,7 +92,12 @@ customerRouter.get("/calculate-route", async (req: Request, res: Response) => {
 
   try {
     const output = await customerFactory.calculateRoutes();
-    res.send(output);
+
+    if (output instanceof Notification) {
+      res.status(400).send(output);
+    } else {
+      res.send(output);
+    }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     res.status(500).send({
